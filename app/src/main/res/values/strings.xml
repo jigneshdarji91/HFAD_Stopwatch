@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HFAD_Stopwatch</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_start">Start</string>
+    <string name="button_stop">Stop</string>
+    <string name="button_reset">Reset</string>
+</resources>
