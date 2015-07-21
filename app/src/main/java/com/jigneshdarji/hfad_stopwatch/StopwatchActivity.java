@@ -21,7 +21,12 @@ public class StopwatchActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch);
-
+        if(savedInstanceState != null)
+        {
+            mRunning = savedInstanceState.getBoolean("mRunning");
+            mSeconds = savedInstanceState.getInt("mSeconds", 0);
+        }
+        displayTimer();
         runTimer();
     }
 
@@ -47,10 +52,13 @@ public class StopwatchActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onSaveInstanceState(Bundle onSaveInstanceState){
+        onSaveInstanceState.putInt("mSeconds", mSeconds);
+        onSaveInstanceState.putBoolean("mRunning", mRunning);
+    }
+
     public void runTimer()
     {
-        final TextView textView = (TextView) findViewById(R.id.textView);
-
         Thread t = new Thread(){
 
             @Override
@@ -58,12 +66,12 @@ public class StopwatchActivity extends Activity {
                 try{
                     while(!isInterrupted()) {
                         Thread.sleep(1000);
+                        if(mRunning)
+                            mSeconds++;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                textView.setText(getFormattedTime(mSeconds));
-                                if(mRunning)
-                                    mSeconds++;
+                                displayTimer();
                             }
                         });
                     }
@@ -81,6 +89,12 @@ public class StopwatchActivity extends Activity {
         int seconds = secondsElapsed%60;
         String time = String.format("%d:%02d:%02d", hours, minutes, seconds);
         return time;
+    }
+
+    public void displayTimer()
+    {
+        final TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(getFormattedTime(mSeconds));
     }
 
     public void onClickStart(View view)

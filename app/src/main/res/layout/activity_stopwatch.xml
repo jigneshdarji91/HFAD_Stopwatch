@@ -9,14 +9,13 @@
         android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:textAppearance="?android:textAppearanceLarge"
         android:textSize="92sp"/>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+        android:layout_above="@+id/stop"
         android:text="@string/button_start"
         android:id="@+id/start"
         android:onClick="onClickStart"/>
@@ -24,7 +23,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/start"
+        android:layout_above="@+id/reset"
         android:text="@string/button_stop"
         android:id="@+id/stop"
         android:onClick="onClickStop"/>
@@ -32,7 +31,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stop"
+        android:layout_alignParentBottom="true"
         android:text="@string/button_reset"
         android:id="@+id/reset"
         android:onClick="onClickReset"/>
