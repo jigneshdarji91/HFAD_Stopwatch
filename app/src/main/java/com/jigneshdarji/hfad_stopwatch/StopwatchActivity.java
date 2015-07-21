@@ -14,8 +14,9 @@ import java.util.logging.LogRecord;
 
 public class StopwatchActivity extends Activity {
 
-    public int mSeconds = 0;
-    public boolean mRunning = false;
+    private int mSeconds = 0;
+    private boolean mRunning = false;
+    private boolean mWasRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,5 +112,19 @@ public class StopwatchActivity extends Activity {
     {
         mRunning = false;
         mSeconds = 0;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mWasRunning = mRunning;
+        mRunning = false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mWasRunning)
+            mRunning = true;
     }
 }
